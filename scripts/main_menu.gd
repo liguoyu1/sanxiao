@@ -5,9 +5,9 @@ extends ColorRect
 @onready var settings_panel = $SettingsPanel
 @onready var volume_slider = $SettingsPanel/VolumeSlider
 
-func _am(): return Engine.get_singleton("AudioManager")
-func _sm(): return Engine.get_singleton("SaveManager")
-func _gf(): return Engine.get_singleton("GameFlow")
+func _am(): return AudioManager
+func _sm(): return SaveManager
+func _gf(): return GameFlow
 
 func _ready() -> void:
 	play_btn.pressed.connect(_on_play)

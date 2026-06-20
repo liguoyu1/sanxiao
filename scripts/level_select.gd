@@ -3,15 +3,15 @@ extends ColorRect
 const TOTAL_LEVELS := 50
 const COLS := 5
 
-@onready var grid = $GridContainer
+@onready var grid = $ScrollContainer/GridContainer
 @onready var scroll = $ScrollContainer
 @onready var back_btn = $BackBtn
 
 var _level_btns: Array[Button] = []
 
-func _am(): return Engine.get_singleton("AudioManager")
-func _sm(): return Engine.get_singleton("SaveManager")
-func _gf(): return Engine.get_singleton("GameFlow")
+func _am(): return get_node("/root/AudioManager")
+func _sm(): return get_node("/root/SaveManager")
+func _gf(): return get_node("/root/GameFlow")
 
 func _ready() -> void:
 	back_btn.pressed.connect(func():
@@ -30,8 +30,8 @@ func _build_grid() -> void:
 		btn.custom_minimum_size = Vector2(100, 100)
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
-	var unlocked = _sm().is_unlocked(i)
-	var stars = _sm().get_stars(i)
+		var unlocked = _sm().is_unlocked(i)
+		var stars = _sm().get_stars(i)
 
 		btn.text = "%d" % i
 		btn.disabled = not unlocked

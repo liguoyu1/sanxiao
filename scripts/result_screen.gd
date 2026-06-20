@@ -4,8 +4,8 @@ signal action_next()
 signal action_retry()
 signal action_quit()
 
-func _gf(): return Engine.get_singleton("GameFlow")
-func _sm(): return Engine.get_singleton("SaveManager")
+func _gf(): return GameFlow
+func _sm(): return SaveManager
 
 @onready var title_label = $VBox/TitleLabel
 @onready var score_label = $VBox/ScoreLabel

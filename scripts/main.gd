@@ -4,8 +4,8 @@ const HC = preload("res://scripts/hex_coord.gd")
 const GL = preload("res://scripts/game_loop.gd")
 const LD = preload("res://scripts/level_data.gd")
 
-func _am(): return Engine.get_singleton("AudioManager")
-func _gf(): return Engine.get_singleton("GameFlow")
+func _am(): return AudioManager
+func _gf(): return GameFlow
 
 @onready var bc = $BoardContainer
 @onready var rdr = $BoardContainer/BoardRenderer

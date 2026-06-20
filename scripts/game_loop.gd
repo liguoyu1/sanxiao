@@ -4,7 +4,7 @@ const HC = preload("res://scripts/hex_coord.gd")
 const MR = preload("res://scripts/match_resolver.gd")
 const TF = preload("res://scripts/tile_fall.gd")
 
-func _am(): return Engine.get_singleton("AudioManager")
+func _am(): return AudioManager
 
 signal score_changed(s: int)
 signal swap_performed()

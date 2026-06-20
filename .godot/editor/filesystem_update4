@@ -1,0 +1,6 @@
+res://addons/godot_ai/plugin.gd
+res://scripts/audio_manager.gd
+res://scripts/game_flow.gd
+res://scripts/level_select.gd
+res://scripts/main_menu.gd
+res://scenes/level_select.tscn

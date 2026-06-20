@@ -45,13 +45,13 @@ func _save_config() -> void:
 	cfg.set_value("audio", "muted", _muted)
 	cfg.save(VOL_CFG)
 
-func _ensure_bus(name: String, parent: int) -> int:
+func _ensure_bus(bus_name: String, parent: int) -> int:
 	for i in AudioServer.bus_count:
-		if AudioServer.get_bus_name(i) == name:
+		if AudioServer.get_bus_name(i) == bus_name:
 			return i
 	var idx = AudioServer.bus_count
 	AudioServer.add_bus(idx)
-	AudioServer.set_bus_name(idx, name)
+	AudioServer.set_bus_name(idx, bus_name)
 	AudioServer.set_bus_send(idx, AudioServer.get_bus_name(parent))
 	return idx
 

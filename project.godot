@@ -19,10 +19,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SaveManager="res://scripts/save_manager.gd"
-AudioManager="res://scripts/audio_manager.gd"
-GameFlow="res://scripts/game_flow.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+SaveManager="*res://scripts/save_manager.gd"
+AudioManager="*res://scripts/audio_manager.gd"
+GameFlow="*res://scripts/game_flow.gd"
 
 [display]
 

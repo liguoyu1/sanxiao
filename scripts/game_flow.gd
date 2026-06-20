@@ -1,8 +1,8 @@
 extends Node
 signal before_level_start(level_id: int)
 
-func _am(): return Engine.get_singleton("AudioManager")
-func _sm(): return Engine.get_singleton("SaveManager")
+func _am(): return AudioManager
+func _sm(): return SaveManager
 
 var current_level: int = 1
 var last_result: Dictionary = {}

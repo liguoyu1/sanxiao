@@ -1221,7 +1221,7 @@ func _finalize_stop_if_port_free(port: int) -> bool:
 static func _build_server_flags(port: int, ws_port: int) -> Array[String]:
 	var flags: Array[String] = []
 	flags.assign([
-		"--transport", "streamable-http",
+		"--transport", "sse",
 		"--port", str(port),
 		"--ws-port", str(ws_port),
 		"--pid-file", ProjectSettings.globalize_path(SERVER_PID_FILE),
@@ -1566,7 +1566,7 @@ func start_dev_server() -> void:
 		var inner_args: Array[String] = []
 		inner_args.assign(server_cmd.slice(1))
 		inner_args.append_array([
-			"--transport", "streamable-http",
+			"--transport", "sse",
 			"--port", str(ClientConfigurator.http_port()),
 			"--ws-port", str(_resolved_ws_port),
 			"--reload",
