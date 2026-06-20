@@ -4,6 +4,8 @@ const HC = preload("res://scripts/hex_coord.gd")
 const MR = preload("res://scripts/match_resolver.gd")
 const TF = preload("res://scripts/tile_fall.gd")
 
+func _am(): return Engine.get_singleton("AudioManager")
+
 signal score_changed(s: int)
 signal swap_performed()
 signal match_resolved(matches: Array)
@@ -52,7 +54,7 @@ func _resolve_swap(c1, c2):
 	var tw = create_tween().set_parallel(true)
 	if t1: tw.tween_property(t1, "position", p2, 0.25).set_ease(Tween.EASE_IN_OUT)
 	if t2: tw.tween_property(t2, "position", p1, 0.25).set_ease(Tween.EASE_IN_OUT)
-	AudioManager.play_swap()
+	_am().play_swap()
 	swap_performed.emit()
 	tw.tween_callback(_resolve_loop)
 
@@ -66,7 +68,7 @@ func _resolve_loop() -> void:
 	score = _match_resolver.score
 	score_changed.emit(score)
 	match_resolved.emit(matches)
-	AudioManager.play_match()
+	_am().play_match()
 
 	var positions = []
 	for m in matches:
@@ -78,7 +80,7 @@ func _resolve_loop() -> void:
 	tw.tween_interval(0.3)
 	tw.tween_callback(func():
 		_ripple.trigger_ripple(matches)
-		AudioManager.play_ripple()
+		_am().play_ripple()
 		ripple_triggered.emit()
 	)
 	tw.tween_interval(0.3)

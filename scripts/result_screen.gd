@@ -4,6 +4,9 @@ signal action_next()
 signal action_retry()
 signal action_quit()
 
+func _gf(): return Engine.get_singleton("GameFlow")
+func _sm(): return Engine.get_singleton("SaveManager")
+
 @onready var title_label = $VBox/TitleLabel
 @onready var score_label = $VBox/ScoreLabel
 @onready var stars_label = $VBox/StarsLabel
@@ -25,5 +28,5 @@ func show_result(won: bool, score: int, stars: int) -> void:
 	for i in 3:
 		s += "★" if i < stars else "☆"
 	stars_label.text = s
-	var next_id = GameFlow.current_level + 1
-	next_btn.visible = won and SaveManager.is_unlocked(next_id)
+	var next_id = _gf().current_level + 1
+	next_btn.visible = won and _sm().is_unlocked(next_id)

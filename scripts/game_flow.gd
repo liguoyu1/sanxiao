@@ -1,15 +1,18 @@
 extends Node
 signal before_level_start(level_id: int)
 
+func _am(): return Engine.get_singleton("AudioManager")
+func _sm(): return Engine.get_singleton("SaveManager")
+
 var current_level: int = 1
 var last_result: Dictionary = {}
 
 func go_to_main_menu() -> void:
-	AudioManager.stop_bgm()
+	_am().stop_bgm()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func go_to_level_select() -> void:
-	AudioManager.stop_bgm()
+	_am().stop_bgm()
 	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
 
 func start_level(level_id: int) -> void:
@@ -21,11 +24,11 @@ func retry_level() -> void:
 	start_level(current_level)
 
 func next_level() -> void:
-	if SaveManager.is_unlocked(current_level + 1):
+	if _sm().is_unlocked(current_level + 1):
 		start_level(current_level + 1)
 	else:
 		go_to_level_select()
 
 func on_level_complete(score: int, stars: int) -> void:
 	last_result = {"score": score, "stars": stars, "won": stars > 0}
-	SaveManager.set_stars(current_level, stars)
+	_sm().set_stars(current_level, stars)

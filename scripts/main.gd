@@ -4,6 +4,9 @@ const HC = preload("res://scripts/hex_coord.gd")
 const GL = preload("res://scripts/game_loop.gd")
 const LD = preload("res://scripts/level_data.gd")
 
+func _am(): return Engine.get_singleton("AudioManager")
+func _gf(): return Engine.get_singleton("GameFlow")
+
 @onready var bc = $BoardContainer
 @onready var rdr = $BoardContainer/BoardRenderer
 @onready var mgr = $LevelManager
@@ -27,7 +30,7 @@ func _ready():
 
 	hud.level_result.connect(_on_hud_level_result)
 	hud.power_pressed.connect(_on_power_pressed)
-	start_level(GameFlow.current_level)
+	start_level(_gf().current_level)
 
 func start_level(id: int):
 	rdr.clear()
@@ -52,10 +55,10 @@ func start_level(id: int):
 	hud.setup_for_level(mgr.get_level(id))
 	if result_screen:
 		result_screen.hide()
-	AudioManager.start_bgm()
+	_am().start_bgm()
 
 func _on_hud_level_result(s):
-	var lv = mgr.get_level(GameFlow.current_level)
+	var lv = mgr.get_level(_gf().current_level)
 	if lv == null:
 		return
 	var ok: bool
@@ -66,12 +69,12 @@ func _on_hud_level_result(s):
 			and (lv.target_loops <= 0 or hud.loops_made >= lv.target_loops)
 
 	var stars = _calc_stars(s, ok, lv)
-	GameFlow.on_level_complete(s, stars)
+	_gf().on_level_complete(s, stars)
 
 	if ok:
-		AudioManager.play_win()
+		_am().play_win()
 	else:
-		AudioManager.play_lose()
+		_am().play_lose()
 
 	if not result_screen:
 		return
@@ -93,16 +96,16 @@ func _on_score_changed(s: int) -> void:
 
 func _on_power_pressed(idx: int) -> void:
 	if game_loop and game_loop.use_power(idx):
-		AudioManager.play_power()
+		_am().play_power()
 
 func _on_next():
-	AudioManager.play_click()
-	GameFlow.next_level()
+	_am().play_click()
+	_gf().next_level()
 
 func _on_retry():
-	AudioManager.play_click()
-	GameFlow.retry_level()
+	_am().play_click()
+	_gf().retry_level()
 
 func _on_quit():
-	AudioManager.play_click()
-	GameFlow.go_to_level_select()
+	_am().play_click()
+	_gf().go_to_level_select()

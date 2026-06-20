@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c7dbvyfyp2c13"]
+
+[ext_resource type="Script" uid="uid://dui66sbo0uinj" path="res://addons/strix_asset_hub/packager_dock.gd" id="1_krqv8"]
+[ext_resource type="Texture2D" uid="uid://6vdwpxg7f65b" path="res://addons/strix_asset_hub/strix_logo_mono.svg" id="2_2s6e3"]
+
+[node name="AssetPackagerDock" type="VBoxContainer" unique_id=2133863016]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_krqv8")
+
+[node name="HeaderBox" type="HBoxContainer" parent="." unique_id=4563665]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TexLogo" type="TextureRect" parent="HeaderBox" unique_id=1173275096]
+self_modulate = Color(0.9, 0.9, 0.9, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_2s6e3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LblTitle" type="Label" parent="HeaderBox" unique_id=427537846]
+layout_mode = 2
+text = "STRIX Asset Hub"
+
+[node name="BtnAbout" type="Button" parent="HeaderBox" unique_id=1807643416]
+layout_mode = 2
+text = "Dev Info"
+
+[node name="BtnSelectFolder" type="Button" parent="." unique_id=167141644]
+layout_mode = 2
+text = "Select File / Folder"
+
+[node name="LblPath" type="Label" parent="." unique_id=2140597035]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Path: None"
+autowrap_mode = 3
+
+[node name="FileTree" type="Tree" parent="." unique_id=1104955194]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BtnExport" type="Button" parent="." unique_id=779446064]
+layout_mode = 2
+disabled = true
+text = "Export ZIP"
+
+[node name="BtnImport" type="Button" parent="." unique_id=960233351]
+layout_mode = 2
+text = "Import STRIX Package"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=2080715346]
+visible = false
+layout_mode = 2
+
+[node name="WarningDialog" type="AcceptDialog" parent="." unique_id=1907561429]
+oversampling_override = 1.0
+title = "Warning"
+size = Vector2i(119, 100)
+dialog_text = "Empty Folder"
+
+[node name="AboutDialog" type="AcceptDialog" parent="." unique_id=1369393609]
+oversampling_override = 1.0
+title = "About STRIX Studio"
+position = Vector2i(0, 36)
+size = Vector2i(480, 328)
+
+[node name="AboutText" type="RichTextLabel" parent="AboutDialog" unique_id=155059078]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 279.0
+bbcode_enabled = true
+text = "[center][b]STRIX Asset Hub v1.0[/b]
+[i]Code - Steel - Sci-fi.[/i]
+
+[img=64x64]res://addons/strix_asset_hub/strix_logo_mono.svg[/img]
+
+Developed by [b]STRIX OWL[/b].
+If this tool saved you hours of debugging, consider supporting my upcoming games![/center]
+
+[center][url=itch]🎮 Visit Itch.io[/url]   |   [url=kofi]☕ Buy me a Coffee[/url][/center]"
+fit_content = true
