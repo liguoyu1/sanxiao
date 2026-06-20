@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1_h5h40"]
+
+[resource]
+script = ExtResource("1_h5h40")
+level_id = 36
+mode = 1
+display_name = "限时 1"
+time_limit = 57.5

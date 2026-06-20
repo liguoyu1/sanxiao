@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1_pmqg3"]
+
+[resource]
+script = ExtResource("1_pmqg3")
+level_id = 31
+display_name = "经典 31"
+max_steps = 15
+target_score = 1750
+target_loops = 11

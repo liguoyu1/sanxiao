@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BoardTheme" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://themes/theme_data.gd" id="1_theme"]
+
+[resource]
+script = ExtResource("1_theme")
+name = "深海"
+bg_color = Color(0, 0.05, 0.1, 1)
+grid_color = Color(0.1, 0.25, 0.3, 0.4)
+tile_colors = [Color(0, 0.4, 0.7, 1), Color(0, 0.6, 0.6, 1), Color(0.9, 0.4, 0.2, 1), Color(0.2, 0.7, 0.4, 1), Color(0.3, 0.6, 0.9, 1)]
+fx_color = Color(0.3, 1, 1, 1)
+ripple_color = Color(0.2, 0.8, 1, 0.3)

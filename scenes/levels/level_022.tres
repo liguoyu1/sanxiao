@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1_mxmul"]
+
+[resource]
+script = ExtResource("1_mxmul")
+level_id = 22
+display_name = "经典 22"
+max_steps = 15
+target_score = 1300
+target_loops = 2

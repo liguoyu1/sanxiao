@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1_bedgu"]
+
+[resource]
+script = ExtResource("1_bedgu")
+level_id = 42
+mode = 1
+display_name = "限时 7"
+time_limit = 42.5

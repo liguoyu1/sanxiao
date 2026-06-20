@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://djav68iwtc4i1"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="2_hud"]
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="3_mgr"]
+[ext_resource type="Script" path="res://scripts/board_renderer.gd" id="4_render"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_main")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("3_mgr")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 710.0
+offset_bottom = 120.0
+script = ExtResource("2_hud")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "🍭 0"
+
+[node name="StepsLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 20
+text = "👣 30"
+
+[node name="TimerLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 20
+text = "⏱ 60"
+visible = false
+
+[node name="TargetLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 90.0
+offset_right = 700.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 14
+text = ""
+
+[node name="PowerRow" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 10.0
+offset_right = 700.0
+offset_bottom = 45.0
+
+[node name="PowerBtn0" type="Button" parent="HUD/PowerRow"]
+layout_mode = 2
+text = "🌊"
+tooltip_text = "共振波纹"
+
+[node name="PowerBtn1" type="Button" parent="HUD/PowerRow"]
+layout_mode = 2
+text = "🔒"
+tooltip_text = "圈层固化"
+
+[node name="PowerBtn2" type="Button" parent="HUD/PowerRow"]
+layout_mode = 2
+text = "🎯"
+tooltip_text = "全域谐振"
+
+[node name="PowerBtn3" type="Button" parent="HUD/PowerRow"]
+layout_mode = 2
+text = "🌀"
+tooltip_text = "紊乱净化"
+
+[node name="BoardContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoardRenderer" type="Node2D" parent="BoardContainer"]
+script = ExtResource("4_render")

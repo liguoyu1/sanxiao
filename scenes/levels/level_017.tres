@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1_l5njb"]
+
+[resource]
+script = ExtResource("1_l5njb")
+level_id = 17
+display_name = "经典 17"
+max_steps = 18
+target_score = 1050

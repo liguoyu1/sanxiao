@@ -1,0 +1,109 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+
+[node name="MainMenu" type="ColorRect"]
+color = Color(0.08, 0.08, 0.12, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource("1_menu")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 280.0
+offset_right = 660.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "圈层共振三消"
+
+[node name="SubTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 400.0
+offset_right = 660.0
+offset_bottom = 440.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+text = "Circle Resonance Match-3"
+
+[node name="PlayBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 520.0
+offset_right = 460.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 28
+text = "开始游戏"
+
+[node name="SettingsBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 600.0
+offset_right = 460.0
+offset_bottom = 650.0
+theme_override_font_sizes/font_size = 20
+text = "设置"
+
+[node name="SettingsPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_left = 160.0
+offset_top = 500.0
+offset_right = 560.0
+offset_bottom = 700.0
+
+[node name="Label" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "音量"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = 360.0
+offset_bottom = 85.0
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="MuteBtn" type="CheckButton" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 130.0
+text = "静音"
+
+[node name="CloseBtn" type="Button" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 100.0
+offset_right = 360.0
+offset_bottom = 130.0
+text = "关闭"
+
+[node name="Footer" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 1200.0
+offset_right = 660.0
+offset_bottom = 1240.0
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+text = "Powered by Godot Engine"

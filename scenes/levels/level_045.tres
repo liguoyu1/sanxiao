@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1_ol2yp"]
+
+[resource]
+script = ExtResource("1_ol2yp")
+level_id = 45
+mode = 2
+display_name = "解谜 2"
+max_steps = 7
