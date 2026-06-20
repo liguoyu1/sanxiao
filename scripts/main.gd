@@ -13,9 +13,6 @@ var result_screen
 var board
 var game_loop
 
-func _am(): return Engine.get_singleton("AudioManager")
-func _gf(): return Engine.get_singleton("GameFlow")
-
 func _ready():
 	if not ResourceLoader.exists("res://scenes/levels/level_001.tres"):
 		mgr.generate_all_levels()
@@ -30,7 +27,7 @@ func _ready():
 
 	hud.level_result.connect(_on_hud_level_result)
 	hud.power_pressed.connect(_on_power_pressed)
-	start_level(_gf().current_level)
+	start_level(GameFlow.current_level)
 
 func start_level(id: int):
 	rdr.clear()
@@ -55,11 +52,10 @@ func start_level(id: int):
 	hud.setup_for_level(mgr.get_level(id))
 	if result_screen:
 		result_screen.hide()
-	_am().start_bgm()
+	AudioManager.start_bgm()
 
 func _on_hud_level_result(s):
-	var gf = _gf()
-	var lv = mgr.get_level(gf.current_level)
+	var lv = mgr.get_level(GameFlow.current_level)
 	if lv == null:
 		return
 	var ok: bool
@@ -70,12 +66,12 @@ func _on_hud_level_result(s):
 			and (lv.target_loops <= 0 or hud.loops_made >= lv.target_loops)
 
 	var stars = _calc_stars(s, ok, lv)
-	gf.on_level_complete(s, stars)
+	GameFlow.on_level_complete(s, stars)
 
 	if ok:
-		_am().play_win()
+		AudioManager.play_win()
 	else:
-		_am().play_lose()
+		AudioManager.play_lose()
 
 	if not result_screen:
 		return
@@ -97,16 +93,16 @@ func _on_score_changed(s: int) -> void:
 
 func _on_power_pressed(idx: int) -> void:
 	if game_loop and game_loop.use_power(idx):
-		_am().play_power()
+		AudioManager.play_power()
 
 func _on_next():
-	_am().play_click()
-	_gf().next_level()
+	AudioManager.play_click()
+	GameFlow.next_level()
 
 func _on_retry():
-	_am().play_click()
-	_gf().retry_level()
+	AudioManager.play_click()
+	GameFlow.retry_level()
 
 func _on_quit():
-	_am().play_click()
-	_gf().go_to_level_select()
+	AudioManager.play_click()
+	GameFlow.go_to_level_select()

@@ -9,18 +9,13 @@ const COLS := 5
 
 var _level_btns: Array[Button] = []
 
-func _am(): return Engine.get_singleton("AudioManager")
-func _sm(): return Engine.get_singleton("SaveManager")
-func _gf(): return Engine.get_singleton("GameFlow")
-
 func _ready() -> void:
 	back_btn.pressed.connect(func():
-		_am().play_click()
-		_gf().go_to_main_menu())
+		AudioManager.play_click()
+		GameFlow.go_to_main_menu())
 	_build_grid()
 
 func _build_grid() -> void:
-	var sm = _sm()
 	grid.columns = COLS
 	for c in grid.get_children():
 		c.queue_free()
@@ -31,8 +26,8 @@ func _build_grid() -> void:
 		btn.custom_minimum_size = Vector2(100, 100)
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
-		var unlocked = sm.is_unlocked(i)
-		var stars = sm.get_stars(i)
+		var unlocked = SaveManager.is_unlocked(i)
+		var stars = SaveManager.get_stars(i)
 
 		btn.text = "%d" % i
 		btn.disabled = not unlocked
@@ -53,8 +48,8 @@ func _build_grid() -> void:
 		_level_btns.append(btn)
 
 func _on_level_pressed(id: int) -> void:
-	_am().play_click()
-	_gf().start_level(id)
+	AudioManager.play_click()
+	GameFlow.start_level(id)
 
 func _get_level_data(id: int):
 	var path = "res://scenes/levels/level_%03d.tres" % id

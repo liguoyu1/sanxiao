@@ -11,9 +11,6 @@ signal action_quit()
 @onready var retry_btn = $VBox/RetryBtn
 @onready var quit_btn = $VBox/QuitBtn
 
-func _gf(): return Engine.get_singleton("GameFlow")
-func _sm(): return Engine.get_singleton("SaveManager")
-
 func _ready() -> void:
 	next_btn.pressed.connect(func(): action_next.emit())
 	retry_btn.pressed.connect(func(): action_retry.emit())
@@ -28,10 +25,5 @@ func show_result(won: bool, score: int, stars: int) -> void:
 	for i in 3:
 		s += "★" if i < stars else "☆"
 	stars_label.text = s
-	var gf = _gf()
-	var sm = _sm()
-	if gf and sm:
-		var next_id = gf.current_level + 1
-		next_btn.visible = won and sm.is_unlocked(next_id)
-	else:
-		next_btn.visible = false
+	var next_id = GameFlow.current_level + 1
+	next_btn.visible = won and SaveManager.is_unlocked(next_id)

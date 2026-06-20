@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://scripts/hud.gd" id="2_hud"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="3_mgr"]
 [ext_resource type="Script" path="res://scripts/board_renderer.gd" id="4_render"]
+[ext_resource type="Script" path="res://scripts/particle_fx.gd" id="5_pfx"]
+[ext_resource type="Script" path="res://scripts/ripple_system.gd" id="6_ripple"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -99,4 +101,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BoardRenderer" type="Node2D" parent="BoardContainer"]
-script = ExtResource("4_render")
+	script = ExtResource("4_render")
+
+[node name="ParticleFX" type="Node" parent="BoardContainer"]
+script = ExtResource("5_pfx")
+
+[node name="RippleSystem" type="Node" parent="BoardContainer"]
+script = ExtResource("6_ripple")
