@@ -1,8 +1,8 @@
 extends Node
 signal before_level_start(level_id: int)
 
-func _am(): return AudioManager
-func _sm(): return SaveManager
+func _am(): return get_node("/root/AudioManager")
+func _sm(): return get_node("/root/SaveManager")
 
 var current_level: int = 1
 var last_result: Dictionary = {}

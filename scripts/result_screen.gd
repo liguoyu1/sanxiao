@@ -4,8 +4,8 @@ signal action_next()
 signal action_retry()
 signal action_quit()
 
-func _gf(): return GameFlow
-func _sm(): return SaveManager
+func _gf(): return get_node("/root/GameFlow")
+func _sm(): return get_node("/root/SaveManager")
 
 @onready var title_label = $VBox/TitleLabel
 @onready var score_label = $VBox/ScoreLabel
