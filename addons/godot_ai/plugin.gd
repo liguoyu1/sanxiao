@@ -1092,7 +1092,17 @@ func _evaluate_strong_port_occupant_proof(port: int, live: Dictionary = {}) -> D
 	var record_version := str(record.get("version", ""))
 
 	if record_pid > 1 and record_pid != OS.get_process_id():
-		if listener_pids.has(record_pid) and _pid_alive_for_proof(record_pid):
+		## Brand-verify the recorded PID before trusting it as a kill target.
+		## A recorded PID can outlive the server it named and be recycled by
+		## the kernel for an unrelated process that happens to bind the same
+		## port — without the cmdline brand gate (the same one the
+		## `pidfile_listener` branch enforces) that process could be killed.
+		## See #525.
+		if (
+			listener_pids.has(record_pid)
+			and _pid_alive_for_proof(record_pid)
+			and _pid_cmdline_is_godot_ai_for_proof(record_pid)
+		):
 			return {"proof": "managed_record", "pids": [record_pid]}
 
 	var legacy_targets := _legacy_pidfile_kill_targets(port, listener_pids)
@@ -1221,7 +1231,7 @@ func _finalize_stop_if_port_free(port: int) -> bool:
 static func _build_server_flags(port: int, ws_port: int) -> Array[String]:
 	var flags: Array[String] = []
 	flags.assign([
-		"--transport", "sse",
+		"--transport", "streamable-http",
 		"--port", str(port),
 		"--ws-port", str(ws_port),
 		"--pid-file", ProjectSettings.globalize_path(SERVER_PID_FILE),
@@ -1566,7 +1576,7 @@ func start_dev_server() -> void:
 		var inner_args: Array[String] = []
 		inner_args.assign(server_cmd.slice(1))
 		inner_args.append_array([
-			"--transport", "sse",
+			"--transport", "streamable-http",
 			"--port", str(ClientConfigurator.http_port()),
 			"--ws-port", str(_resolved_ws_port),
 			"--reload",

@@ -33,6 +33,38 @@ func setup(rdr, brd):
 			_ripple.setup(rdr, brd)
 		_ripple.ripple_completed.connect(_on_ripple_done)
 
+func request_swap(hc1, hc2) -> void:
+	if hc1 == null or hc2 == null:
+		return
+	var c1 = board.get_cell(hc1)
+	var c2 = board.get_cell(hc2)
+	if c1 == null or c2 == null:
+		return
+	if c1.is_disorder or c2.is_disorder:
+		return
+	# Swap board data
+	var k1 = hc1.to_vector2i()
+	var k2 = hc2.to_vector2i()
+	board._cells[k1] = c2
+	board._cells[k2] = c1
+	c1.coord = hc2
+	c2.coord = hc1
+	
+	# Animate + resolve
+	var tw = create_tween()
+	var p1 = hc1.to_pixel(renderer.hex_size)
+	var p2 = hc2.to_pixel(renderer.hex_size)
+	var t1 = renderer._tiles.get(hc1.to_vector2i())
+	var t2 = renderer._tiles.get(hc2.to_vector2i())
+	if t1 and t2:
+		tw.set_parallel(true)
+		tw.tween_property(t1, "position", p2, 0.25).set_ease(Tween.EASE_IN_OUT)
+		tw.tween_property(t2, "position", p1, 0.25).set_ease(Tween.EASE_IN_OUT)
+		_am().play_swap()
+	swap_performed.emit()
+	await tw.finished
+	_resolve_loop()
+
 func _resolve_swap(c1, c2):
 	if c1 == null or c2 == null:
 		return
